@@ -1,8 +1,4 @@
-﻿
-
-
-
-function AddModule() {
+﻿function AddModule() {
 
     var ModuleDiv = document.querySelector(".Education-fields");
      var node = ModuleDiv.cloneNode(true);
@@ -27,6 +23,8 @@ function SaveEducation() {
             Module_Level: document.querySelectorAll(".Module_Level")[i].value
         });
     }
+
+
     
 
     $.ajax(
