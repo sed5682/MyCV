@@ -48,6 +48,7 @@
     <Compile Include="Models\InstitutionModel.cs" />
     <Compile Include="Models\ModuleModel.cs" />
     <Compile Include="Models\PersonalDetailModel.cs" />
+    <Compile Include="Models\Person_Skills.cs" />
     <Compile Include="Models\QualificationModel.cs" />
     <Compile Include="Models\SkillsModel.cs" />
     <Compile Include="Models\UsersModel.cs" />

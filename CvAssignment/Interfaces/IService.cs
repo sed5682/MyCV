@@ -3,6 +3,7 @@ using CvAssignment.ViewModel;
 using DAL.Models;
 using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,9 @@ namespace CvAssignment.Interfaces
         PersonalViewModel GetPersonalDetailsView(int User_ID);
 
         bool EditPersonalViewModel(PersonalViewModel p_model);
+
+        IEnumerable<SkillsViewModel> GetSkillsView();
+        bool SaveSkills(List<SkillsViewModel> UserSkills);
         //List<EducationModel> GetEducationDetailsList(Guid User_ID);
         //SkillsViewModel GetSkills_WorkingExperienceList(Guid User_ID);
 

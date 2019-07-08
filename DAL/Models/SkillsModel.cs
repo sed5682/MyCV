@@ -8,11 +8,10 @@ namespace DAL.Models
 {
     public class SkillsModel
     {
-        public int Skills_ID { get; set; }
-        public string Skills_Details { get; set; }
-        public string Skills_Type { get; set; }
-        public int Person_ID { get; set; }
-        public string Last_Modified { get; set; }
+        public int SkillsID { get; set; }
+        public string SkillsName { get; set; }
+        public string SkillsType { get; set; }
+     
 
     }
 }

@@ -78,6 +78,16 @@ namespace CvAssignment.Controllers
             return View();
         }
 
+        public ActionResult CreateSkills()
+        {
+            
+            return View(_Service.GetSkillsView());
+        }
+
+        //public string SaveSkills(List<SkillsViewModel> SkillsModel)
+        //{
+            
+        //}
 
         [HttpPost]
         public string SaveEducationDetails(List<EducationModel> EducationModel)

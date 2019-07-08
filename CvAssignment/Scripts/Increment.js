@@ -3,8 +3,6 @@
     var ModuleDiv = document.querySelector(".Education-fields");
      var node = ModuleDiv.cloneNode(true);
     document.getElementById("maincontent").appendChild(node);
-
-
 };
 
 

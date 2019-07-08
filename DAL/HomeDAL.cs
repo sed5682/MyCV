@@ -51,15 +51,13 @@ namespace DAL
             return PersonalDetailsList;
         }
 
+       
         public List<SkillsModel> GetSkillsList()
         {
-      
+
 
             List<SkillsModel> SkillsList = new List<SkillsModel>();            
-            string Sql = $"SELECT * FROM Skills";
-
-          
-
+            string Sql = $"SELECT * FROM User_Skills";
 
                 DataTable dt = new DataTable();
                 dt = getData(Sql);
@@ -68,9 +66,8 @@ namespace DAL
                     SkillsList.Add(
                         new SkillsModel
                         {
-                            Skills_Details = Convert.ToString(dr["Skills_Details"]),
-                            Skills_Type = Convert.ToString(dr["Skills_Type"]),
-                            Person_ID = Convert.ToInt32((dr["Person_ID"]))
+                            SkillsID = Convert.ToInt32(dr["SkillsID"]),
+                            SkillsName = Convert.ToString(dr["SkillsName"]),
 
                         });
                 
@@ -200,6 +197,8 @@ namespace DAL
 
             return true;
         }
+
+       
 
         //public List<EducationModel> GetEducationList()
         //{

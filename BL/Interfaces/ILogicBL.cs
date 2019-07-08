@@ -22,6 +22,8 @@ namespace BL.Interfaces
 
         bool EditPersonalDetails(PersonalDetailModel p_details);
 
+        List<SkillsModel> GetSkillsModels();
+
         //int GetUserID(UsersModel U_Model);
 
         // PersonalDetailModel CreateNewUser(PersonalViewModel ls);

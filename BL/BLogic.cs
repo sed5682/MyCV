@@ -85,6 +85,13 @@ namespace BL
             return _homeDAL.UpdatePersonalDetails(p_details);
         }
 
+        public List<SkillsModel> GetSkillsModels()
+        {
+            return _homeDAL.GetSkillsList();
+        }
+
+
+
         //public int GetUserID(UsersModel U_Model) {
         //    return _homeDAL.GetUserID(U_Model);
         //}

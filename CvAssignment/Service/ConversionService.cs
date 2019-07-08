@@ -110,7 +110,7 @@ namespace CvAssignment.Services
                     qualification.Q_Name = qualifications.Q_Name;
                     qualification.Course_Name = qualifications.Course_Name;
                     qualification.Last_Modified = User_ID.ToString();
-                  qualification.Institution_ID = institution_ID;
+                    qualification.Institution_ID = institution_ID;
                   int qualification_ID = _homeDAL.SaveQualificationsModel(qualification);    
                     
 
@@ -163,6 +163,21 @@ namespace CvAssignment.Services
            
         }
 
+        public IEnumerable<SkillsViewModel> GetSkillsView()
+        {
+            IEnumerable<SkillsViewModel> skills = new List<SkillsViewModel>();
+
+            List<SkillsModel> skillsList = _logicBL.GetSkillsModels();
+
+            skills = skillsList.Select(x => new SkillsViewModel
+            {
+                SkillsID = x.SkillsID,
+                SkillsName = x.SkillsName
+            });
+
+            return skills;
+        }
+
         public bool EditPersonalViewModel(PersonalViewModel p_model)
         {
             PersonalDetailModel p_details = new PersonalDetailModel();
@@ -177,6 +192,18 @@ namespace CvAssignment.Services
             return _logicBL.EditPersonalDetails(p_details);
         }
 
+
+        public bool SaveSkills(List<SkillsViewModel> UserSkills)
+        {
+            List<SkillsModel> Skills = UserSkills.Select(x => new SkillsModel
+            {
+                SkillsID = x.SkillsID
+            }).ToList();
+
+            
+
+            return true;
+        }
 
         //public List<EducationModel> GetEducationDetailsList(Guid User_ID)
         //{
