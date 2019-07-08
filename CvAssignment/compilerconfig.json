@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "Content/Stylus/test.css",
+    "inputFile": "Content/Stylus/test.styl"
+  },
+  {
+    "outputFile": "Content/Main.css",
+    "inputFile": "Content/Main.styl"
+  }
+]

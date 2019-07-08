@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Skills";
+}
+@model DAL.Models.SkillsViewModel
+
+<h2 id="sc-title">Working Experience</h2>
+
+<div class="skills-container">
+    <div class="working-areas">
+        <h3 id="sc-title">Working Area</h3>
+        @foreach (var experience in Model.WorkingExperienceList)
+        {
+            <h3>@experience.Working_Area</h3>
+        }
+    </div>
+    <div class="title">
+        <h3 id="sc-title">Title</h3>
+        @foreach (var experience in Model.WorkingExperienceList)
+        {
+            <h3>@experience.Title</h3>
+        }
+    </div>
+</div>
+
+
+@foreach (var skillsType in Model.SkillsList.Select(x => x.Skills_Type).Distinct())
+{
+    <h2 id="sc-title">@skillsType</h2>
+    <div class="skills-container">
+        @foreach (var skills in Model.SkillsList.Where(type => type.Skills_Type.Equals(skillsType)))
+        {
+            <h3>@skills.Details</h3>
+        }
+    </div>
+}
+
+
+

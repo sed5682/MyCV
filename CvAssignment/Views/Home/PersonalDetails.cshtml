@@ -1,0 +1,28 @@
+﻿@using System.Data
+@model DAL.Models.PersonalDetailModel
+@{
+    ViewBag.Title = "PersonalDetails";
+}
+    <div class="fullname">
+        <h2><i class="fa fa-fw fa-user"></i>@Html.DisplayNameFor(model => Model.Full_Name)</h2>
+        <p>@Model.Other_Name @Model.Full_Name </p>
+    </div>
+    <div class="address">
+        <h2><i class="fa fa-address-book"></i>@Html.DisplayNameFor(model => Model.P_Address)</h2>
+        <p>@Model.P_Address</p>
+    </div>
+
+    <div class="email">
+        <h2><i class="fa fa-at"></i>@Html.DisplayNameFor(model => Model.Email_Address)</h2>
+        <p>@Model.Email_Address</p>
+    </div>
+
+
+    <div class="phone">
+        <h2><i class="fa fa-phone"></i>@Html.DisplayNameFor(model => Model.Phone_Number)</h2>
+        <p>@Model.Phone_Number</p>
+    </div>
+
+
+
+

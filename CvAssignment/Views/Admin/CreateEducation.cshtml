@@ -1,0 +1,40 @@
+﻿@model List<CvAssignment.ViewModel.EducationModel>
+
+@{
+    ViewBag.Title = "CreateEducation";
+}
+
+
+<h2>CreateEducation</h2>
+<div id="maincontent">
+    <div class="Education-fields" >
+        <label>Institution Name</label>
+        <input type="text" class="Institution_Name" name="Institution_Name" value="" />
+        <br />
+        <label>Qualifications</label>
+        <input type="text" class="Qualification" name="Qualification" value="" />
+        <br />
+
+        <label>Course Name</label>
+        <input type="text" class="Course_Name" name="Course_Name" value="" />
+        <br />
+
+        <label>Module Name </label>
+        <input type="text" class="Module_Name" name="Module_Name" value="" />
+        <br />
+
+        <label>Module Marks </label>
+        <input type="text" class="Module_Marks" name="Module_Marks" pattern="[0-9]+" title="should not contain letters" value="" />
+        <br />
+
+        <label>Module Level</label>
+        <input type="text" class="Module_Level" name="Module_Level" value="" />
+        <br />
+
+        <input type="button" class="Add_New" onclick="AddModule()" name="Add_New" value="Add New" />
+    </div>
+</div>
+
+<input type="submit" name="Save" value="Save" onclick="SaveEducation()" />
+
+

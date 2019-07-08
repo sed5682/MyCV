@@ -1,0 +1,48 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*<link href="~/Content/navbar.css" rel="stylesheet" />
+    <link href="~/Content/personalDetails.css" rel="stylesheet" />
+    <link href="~/Content/Education.css" rel="stylesheet" />
+    <link href="~/Content/Skills.css" rel="stylesheet" />
+    <link href="~/Content/personalDetails.css" rel="stylesheet" />*@
+
+    <link href="~/Content/Main.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/Increment.js"></script>
+
+</head>
+<body>
+    <div class="bg"> </div>
+    <div class="wrapper">
+        <header>
+
+            <ul class="navbar">
+                <li><i class="fa fa-fw fa-home"></i>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li><i class="fa fa-fw fa-user"></i>@Html.ActionLink("Personal Details", "PersonalDetails", "Home")</li>
+                <li><i class="fa fa-graduation-cap"></i>@Html.ActionLink("Education", "Education", "Home")</li>
+                <li><i class="fa fa-star"></i>@Html.ActionLink("Skills", "Skills", "Home")</li>
+                @*<li><i class="fa fa-sign-in"></i>@Html.ActionLink("Login", "Login", "Home")</li>*@
+
+            </ul>
+        </header>
+
+
+        @RenderBody()
+    </div>
+        <footer>
+           
+        </footer>
+    
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿$colorObject ={
+	red: red,
+	blue: blue,
+	black: black,
+	yellow: yellow,
+	green: green
+}
+
+MixinBody($color, $size, $font_family)
+	background-color: $colorObject.red
+	font-size: $size px
+	font-family: $font_family
+
+	
+
+html
+body
+	MixinBody(red, 30, arial)
+

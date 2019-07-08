@@ -1,0 +1,39 @@
+﻿body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: arial sans-serif;
+    color: white;
+    
+}
+
+
+.bg {
+    background-image: url("/Pictures/bg2.jpg");
+    background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.name {
+    display: flex;
+    height: 70vh;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+    color: white;
+    
+}
+
+    .name h1 {
+        font-size: 10vh;
+        border-bottom: white solid 0.1vh;
+    }
+
+        .name h1:hover {
+            transition: 1.3s;
+            border-bottom: #75787c solid 0.1vh;
+        }
+

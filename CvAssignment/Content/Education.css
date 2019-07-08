@@ -1,0 +1,15 @@
+﻿.education-container h3 {
+    font-size: 2vh;
+}
+
+.education-container, .skills-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+#title {
+    color: white;
+    background: linear-gradient(to right, rgba(128, 128, 128, 0.2), rgba(128, 128, 128, 0.5) 70%);
+    padding: 1vh;
+    border-radius: 1vh;
+}

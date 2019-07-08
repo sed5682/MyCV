@@ -1,0 +1,19 @@
+﻿#sc-title {
+    color: white;
+    background: linear-gradient(to right, rgba(128, 128, 128, 0.2), rgba(128, 128, 128, 0.5) 70%);
+    padding: 1vh;
+    border-radius: 1vh;
+}
+
+.skills-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.skills-container h3 {
+    border-bottom: white solid 0.2vh;
+    padding: 1vh;
+    border-radius: 2vh;
+    font-size: 2vh;
+}

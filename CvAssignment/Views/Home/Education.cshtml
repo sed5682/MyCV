@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Education";
+}
+@model List<DAL.Models.EducationModel>
+
+
+
+
+
+@foreach (var level in Model.Select(level => level.Module_Level).Distinct())
+{
+    <h3 id="title"> @Model.Where(l => l.Module_Level.Equals(level)).Select(x => x.Institution_Name).FirstOrDefault()</h3>
+    <div class="education-container">
+
+        <div class="certificate">
+            <h3 id="title">@level</h3>
+            @foreach (var Courses in Model.Where(l => l.Module_Level.Equals(level)))
+            {
+                <h3>@Courses.Module_Name</h3>
+            }
+        </div>
+        <div class="certificate">
+            <h3 id="title">Marks</h3>
+            @foreach (var Courses in Model.Where(l => l.Module_Level.Equals(level)))
+            {
+                <h3>@Courses.Marks</h3>
+            }
+        </div>
+    </div>
+}
+
+

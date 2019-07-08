@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<head>
+    <link href="~/Content/Login.css" rel="stylesheet" />
+    <script src="~/Scripts/Login.js"></script>
+</head>
+
+<div id="mainDiv">
+    <form method="post" action="@Url.Action("ValidateLogin", "Home")">
+        <label for="username">Username</label>
+
+        <input id="username" type="email" name="username" placeholder="Enter Username" required />
+        <label for="Password">Password</label>
+        <br />
+
+        <input id="Password" onkeyup="checkPassword()" onkeydown="checkPassword()" onfocus="myFunction()" onblur="myFunction()" type="password" name="password" placeholder="Enter Password" required />
+        <p class="errorDisplay" id="errorPassword">@ViewBag.valid</p>
+        <input class="btnDisable" id="btnSubmit" type="submit" value="Login" />
+
+    </form>
+
+</div>
