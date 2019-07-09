@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CvAssignment.ViewModel
 {
@@ -17,7 +18,20 @@ namespace CvAssignment.ViewModel
 
         // public type SkillsType { get; set; }
 
+       // public List<string> AcquiredSkills{ get; set; }
+
+       // public List<SelectListItem> skillViews { get; set; }
+        //{
+        //skillViews.Add(new SelectListItem()
+        //{
+        //    Value = skills.SkillsID.ToString(),
+        //    Text = skills.SkillsName
+
+        //});
+
     }
+
+}
     
     
 
@@ -26,4 +40,3 @@ namespace CvAssignment.ViewModel
     //    Personal,
     //    Technical
     //}
-}

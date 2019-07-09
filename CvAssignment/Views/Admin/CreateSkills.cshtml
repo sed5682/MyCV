@@ -7,34 +7,71 @@
 
 <head>
     <script src="~/Scripts/AddNewSkills.js"></script>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 20%;
+            margin: auto;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+        }
+    </style>
 </head>
 
-@{
-    List<SelectListItem> skillViews = new List<SelectListItem>();
-    foreach (var skills in Model)
-    {
-        skillViews.Add(new SelectListItem()
-        {
-            Value = skills.SkillsID.ToString(),
-            Text = skills.SkillsName
 
-        });
+@*@{
+           List<SelectListItem> skillViews = new List<SelectListItem>();
+           foreach (var skills in Model)
+           {
+               skillViews.Add(new SelectListItem()
+               {
+                   Value = skills.SkillsID.ToString(),
+                   Text = skills.SkillsName
 
-    }
-    List<int> skillsID = Model.Select(x => x.SkillsID).ToList();
-}
+               });
+
+           }
+           List<int> skillsID = Model.Select(x => x.SkillsID).ToList();
+    }*@
 
 <h2>CreateSkills</h2>
+<div id="showSkillsAcquired"></div>
+<p id="Saved"></p>
 
-@*@using (Html.BeginForm())*@
-{
-<div id="skills-main">
-    <div class="skills-container">
-        @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
-        <input type="button" value="Add New Skills" onclick="AddNewSkills()" />
-    </div>
+<div id="dropdownRefresh"></div>
+
+@*<div id="skills-main">
+        <div class="skills-container">
+            @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
+            <input type="button" value="Add New Skills" onclick="AddNewSkills()" />
+        </div>
+    </div>*@
+
+
+<div id="CreateNewSkill">
+    <label>Create New Skills</label>
+    <input id="NewSkillText" type="text" value="" />
+    <input type="submit" value="Save" onclick="SaveNewSkills()" />
 </div>
-<input type="submit" value="Create" class="btn btn-default container" onclick="SaveSkills()" />
 
-@* } *@
 
+<script>
+    RefreshSkills();
+    AddNewSkillsDropDown();
+    function RefreshSkills() {
+
+        var urlInfo = '@Url.Action("ShowSkillsAcquired", "Admin")';
+        $("#showSkillsAcquired").load(urlInfo);
+
+    };
+
+    function AddNewSkillsDropDown() {
+        var Url = '@Url.Action("AddNewSkill","Admin")';
+        $("#dropdownRefresh").load(Url);
+    }
+</script>

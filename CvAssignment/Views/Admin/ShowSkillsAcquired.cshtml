@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout = null;
+}
+@model List<CvAssignment.ViewModel.SkillsAcquired>
+
+<table>
+    <tr>
+        <th>Skills Already Acquired</th>
+    </tr>
+    @foreach (var skills in Model.Select(x => x.Acquired))
+    {
+        <tr>
+            <td>
+                @skills
+            </td>
+        </tr>
+    }
+</table>

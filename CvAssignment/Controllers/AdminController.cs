@@ -19,7 +19,8 @@ namespace CvAssignment.Controllers
         private readonly IService _Service = new ConversionService();
 
 
-    //    static int user_ID = 1;
+       //For test
+       
 
     
         // GET: Admin
@@ -80,19 +81,35 @@ namespace CvAssignment.Controllers
 
         public ActionResult CreateSkills()
         {
-            
-            return View(_Service.GetSkillsView());
+            Session["User_ID"] = "1";
+            return View(_Service.GetSkillsView(Convert.ToInt32(Session["User_ID"])));
         }
 
-        //public string SaveSkills(List<SkillsViewModel> SkillsModel)
-        //{
+        [HttpPost]
+        public string SaveSkills(List<SkillsViewModel> SkillsModel)
+        {
+            Session["User_ID"] = "1";
+            bool response = _Service.SaveSkills(SkillsModel, Convert.ToInt32(Session["User_ID"]));
+            if (response == true)
+            {
+                return "Successfully Saved";
+            }
+            else
+                return "You have already saved this skill";
             
-        //}
+        }
+
+        [HttpPost]
+        public string UpdateList()
+        {
+            CreateSkills();
+            return "true";
+        }
 
         [HttpPost]
         public string SaveEducationDetails(List<EducationModel> EducationModel)
         {
-
+           
             _Service.CreateEducationDetails(EducationModel, Convert.ToInt32(Session["User_ID"]));
             return "true";
         }
@@ -117,6 +134,30 @@ namespace CvAssignment.Controllers
             return RedirectToAction("ViewUsers", "Admin");
         }
 
+        public ActionResult ShowSkillsAcquired()
+        {
+            Session["User_ID"] = "1";
+            return View(_Service.AcquiredSkills(Convert.ToInt32(Session["User_ID"])));
+        }
 
+        public ActionResult AddNewSkill()
+        {
+            Session["User_ID"] = "1";
+            return View(_Service.GetSkillsView(Convert.ToInt32(Session["User_ID"])));
+        }
+
+        [HttpPost]
+        public string CreateNewSkill(string SkillName)
+        {
+            Session["User_ID"] = "1";
+            bool response = _logicBL.CreateNewSkill(SkillName, Convert.ToInt32(Session["User_ID"]));
+
+            if (response == true)
+            {
+                return "New Skills Saved Successfully";
+            }
+            else
+                return "Skills already exist in Dropdown List";
+        }
     }
 }

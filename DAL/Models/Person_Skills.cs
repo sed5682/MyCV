@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Models
 {
-    class Person_Skills
+    public class Person_Skills
     {
-        int Person_SkillsID { get; set; }
-        int SkillsID { get; set; }
-        int Person_ID { get; set; }
+        public int Person_SkillsID { get; set; }
+        public int SkillsID { get; set; }
+        public int Person_ID { get; set; }
     }
 }

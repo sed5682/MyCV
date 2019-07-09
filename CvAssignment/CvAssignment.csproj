@@ -137,6 +137,7 @@
     <Compile Include="ViewModel\EducationModel.cs" />
     <Compile Include="ViewModel\InstitutionViewModel.cs" />
     <Compile Include="ViewModel\PersonalViewModel.cs" />
+    <Compile Include="ViewModel\SkillsAcquired.cs" />
     <Compile Include="ViewModel\SkillsViewModel.cs" />
     <Compile Include="ViewModel\UsersViewModel.cs" />
     <Compile Include="ViewModel\ViewUsers.cs" />
@@ -220,6 +221,8 @@
     <Content Include="Views\Admin\ViewUsers.cshtml" />
     <Content Include="Views\Admin\EditPersonalDetails.cshtml" />
     <Content Include="Views\Admin\CreateSkills.cshtml" />
+    <Content Include="Views\Admin\ShowSkillsAcquired.cshtml" />
+    <Content Include="Views\Admin\AddNewSkill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,6 +11,8 @@ namespace DAL.Models
         public int SkillsID { get; set; }
         public string SkillsName { get; set; }
         public string SkillsType { get; set; }
+
+        
      
 
     }

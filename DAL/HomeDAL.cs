@@ -198,7 +198,82 @@ namespace DAL
             return true;
         }
 
-       
+        public bool SaveUserSkillsDB(Person_Skills person)
+        {
+            string SqlCheckForExistence = $"SELECT * FROM Person_Skills WHERE Person_ID = {person.Person_ID} AND SkillsID = {person.SkillsID};";
+            DataTable dt = new DataTable();
+            dt = getData(SqlCheckForExistence);
+            if (dt.Rows.Count == 0)
+            {
+
+                string sql = $"INSERT INTO Person_Skills(Person_ID,SkillsID) VALUES({person.Person_ID},{person.SkillsID});";
+
+                SqlConnection _connect = CreateSQLConnection();
+
+                SqlCommand command = new SqlCommand(sql, _connect);
+                _connect.Open();
+                command.ExecuteNonQuery();
+                _connect.Close();
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public List<Person_Skills> GetUserSkillsAcquired(int UserID)
+        {
+            string sql = $"SELECT * FROM Person_SKills WHERE Person_ID = {UserID};; SELECT CAST(scope_identity() AS int)";
+            List<Person_Skills> person_Skills = new List<Person_Skills>();
+
+            DataTable dt = new DataTable();
+            dt = getData(sql);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                person_Skills.Add(
+                    new Person_Skills
+                    {
+                       
+                        SkillsID = Convert.ToInt32(dr["SkillsID"]),
+                        Person_ID = Convert.ToInt32(dr["Person_ID"])
+
+                    });
+
+            }
+            return person_Skills;
+        }
+
+        public bool CreateNewSkills(string skillName, int UserID)
+        {
+            string sql = $"SELECT SkillsName FROM User_Skills WHERE SkillsName = '{skillName}';";
+            DataTable dt = new DataTable();
+            dt = getData(sql);
+            if (dt.Rows.Count == 0)
+            {
+                string InsertSql = $"INSERT INTO User_Skills(SkillsName) VALUES('{skillName}');  SELECT CAST(scope_identity() AS int)";
+                SqlConnection _connect = CreateSQLConnection();
+
+                SqlCommand command = new SqlCommand(InsertSql, _connect);
+                _connect.Open();
+                int SkillsID = (int)command.ExecuteScalar();
+
+                string InsertIntoPersonSkills = $"INSERT INTO Person_Skills(Person_ID,SkillsID) VALUES({UserID},{SkillsID});";
+                SqlCommand Insertcommand = new SqlCommand(InsertIntoPersonSkills, _connect);
+
+                Insertcommand.ExecuteNonQuery();
+                _connect.Close();
+
+                return true;
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
 
         //public List<EducationModel> GetEducationList()
         //{

@@ -25,8 +25,11 @@ namespace CvAssignment.Interfaces
 
         bool EditPersonalViewModel(PersonalViewModel p_model);
 
-        IEnumerable<SkillsViewModel> GetSkillsView();
-        bool SaveSkills(List<SkillsViewModel> UserSkills);
+        IEnumerable<SkillsViewModel> GetSkillsView(int UserID);
+        //SkillsViewModel GetSkillsView(int UserID);
+        bool SaveSkills(List<SkillsViewModel> UserSkills, int UserID);
+
+        List<SkillsAcquired> AcquiredSkills(int UserID);
         //List<EducationModel> GetEducationDetailsList(Guid User_ID);
         //SkillsViewModel GetSkills_WorkingExperienceList(Guid User_ID);
 

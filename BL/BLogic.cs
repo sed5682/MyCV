@@ -87,9 +87,48 @@ namespace BL
 
         public List<SkillsModel> GetSkillsModels()
         {
+            //List<Person_Skills> SkillsAcquired = _homeDAL.GetUserSkillsAcquired(UserID);
             return _homeDAL.GetSkillsList();
         }
 
+        public List<string> GetAcquiredSkills(int UserID)
+        {
+          //  List<SkillsModel> AllSkills = GetSkillsModels();
+          // List<Person_Skills> UserSkills = _homeDAL.GetUserSkillsAcquired(UserID);
+            List<string> SkillsAcquiredName = new List<string>();
+
+            foreach(var SkillsID in GetSkillsModels())
+            {
+                foreach(var UserSkillsID in _homeDAL.GetUserSkillsAcquired(UserID))
+                {
+                    if(SkillsID.SkillsID == UserSkillsID.SkillsID)
+                    {
+                        SkillsAcquiredName.Add(SkillsID.SkillsName);
+                    }
+                }
+            }
+
+            return SkillsAcquiredName;
+
+        }
+
+        public bool CreateNewSkill(string SkillName, int UserID)
+        {
+            return _homeDAL.CreateNewSkills(SkillName, UserID);
+        }
+        public bool SaveUserSkills(List<SkillsModel> SkillsToSave, int UserID)
+        {
+            Person_Skills person = new Person_Skills();
+            foreach(var skillsID in SkillsToSave)
+            {
+                person.Person_ID = UserID;
+                person.SkillsID = skillsID.SkillsID;
+            }
+            
+            
+
+            return _homeDAL.SaveUserSkillsDB(person);
+        }
 
 
         //public int GetUserID(UsersModel U_Model) {

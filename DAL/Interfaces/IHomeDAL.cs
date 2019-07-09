@@ -27,6 +27,9 @@ namespace DAL.Interfaces
         bool SaveModuleModel(ModuleModel module_Model);
 
         bool UpdatePersonalDetails(PersonalDetailModel p_details);
+        bool SaveUserSkillsDB(Person_Skills person);
+        List<Person_Skills> GetUserSkillsAcquired(int UserID);
 
+        bool CreateNewSkills(string skillName, int UserID);
     }   
 }

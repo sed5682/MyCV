@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model IEnumerable<CvAssignment.ViewModel.SkillsViewModel>
+
+
+@{
+    List<SelectListItem> skillViews = new List<SelectListItem>();
+    foreach (var skills in Model)
+    {
+        skillViews.Add(new SelectListItem()
+        {
+            Value = skills.SkillsID.ToString(),
+            Text = skills.SkillsName
+
+        });
+
+    }
+    List<int> skillsID = Model.Select(x => x.SkillsID).ToList();
+}
+
+
+
+
+<p id="Saved"></p>
+
+
+<div id="skills-main">
+    <div class="skills-container">
+        @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
+        <input type="submit" value="Create" class="btn-Create" onclick="SaveSkills()" />
+        @*<input type="button" value="Add New Skills" onclick="AddNewSkills()" />*@
+    </div>
+</div>
+
+

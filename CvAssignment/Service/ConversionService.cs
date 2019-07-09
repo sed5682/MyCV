@@ -7,7 +7,6 @@ using CvAssignment.ViewModel;
 using DAL;
 using DAL.Interfaces;
 using DAL.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +17,7 @@ namespace CvAssignment.Services
         private readonly ILogicBL _logicBL;
         private readonly IHomeDAL _homeDAL;
 
-       static string user_Name = "Steven";
+        static string user_Name = "Steven";
 
         public ConversionService()
         {
@@ -30,12 +29,12 @@ namespace CvAssignment.Services
         {
 
             PersonalDetailModel name = _homeDAL.GetPersonalDetails().Where(user => user.Person_ID.Equals(User_ID)).Select(x => new PersonalDetailModel
-                {
-                    Full_Name = x.Full_Name
-                }).FirstOrDefault();
+            {
+                Full_Name = x.Full_Name
+            }).FirstOrDefault();
 
-                return name;
-  
+            return name;
+
         }
 
         public PersonalDetailModel GetPersonalDetails(int User_ID)
@@ -44,7 +43,7 @@ namespace CvAssignment.Services
             {
                 Full_Name = x.Full_Name,
                 Email_Address = x.Email_Address,
-                Other_Name =x.Other_Name,
+                Other_Name = x.Other_Name,
                 P_Address = x.P_Address,
                 Phone_Number = x.Phone_Number
             }).FirstOrDefault();
@@ -74,9 +73,9 @@ namespace CvAssignment.Services
             U_Model.Username = U_View_Model.Username;
             U_Model.P_Password = U_View_Model.Password;
 
-            
+
             return _logicBL.SaveNewUserDetails(U_Model);
-            
+
         }
         //public int GetUserID(UsersViewModel U_View_Model)
         //{
@@ -90,20 +89,20 @@ namespace CvAssignment.Services
 
         public bool CreateEducationDetails(List<EducationModel> educationModel, int User_ID)
         {
-            
+
             InstitutionModel institution = new InstitutionModel();
             QualificationModel qualification = new QualificationModel();
             ModuleModel modules = new ModuleModel();
 
-            foreach(var institutionName in educationModel.Select(X => X.Institution_Name).Distinct())
+            foreach (var institutionName in educationModel.Select(X => X.Institution_Name).Distinct())
             {
 
                 institution.Institution_Name = institutionName;
                 institution.Person_ID = User_ID;
                 institution.Last_Modified = User_ID.ToString();
-               int institution_ID = _homeDAL.SaveInstitutionModel(institution);
-                    
-              
+                int institution_ID = _homeDAL.SaveInstitutionModel(institution);
+
+
                 foreach (var qualifications in educationModel.Where(t => t.Institution_Name.Equals(institutionName)).Distinct())
                 {
 
@@ -111,8 +110,8 @@ namespace CvAssignment.Services
                     qualification.Course_Name = qualifications.Course_Name;
                     qualification.Last_Modified = User_ID.ToString();
                     qualification.Institution_ID = institution_ID;
-                  int qualification_ID = _homeDAL.SaveQualificationsModel(qualification);    
-                    
+                    int qualification_ID = _homeDAL.SaveQualificationsModel(qualification);
+
 
                     foreach (var module in educationModel.Where(t => t.Q_Name.Equals(qualifications.Q_Name) && t.Institution_Name.Equals(institutionName)).Distinct())
                     {
@@ -125,13 +124,13 @@ namespace CvAssignment.Services
                         modules.Qualification_ID = qualification_ID;
                         _homeDAL.SaveModuleModel(modules);
 
-                        
+
                     }
                 }
             }
 
             return true;
-            
+
         }
 
         public List<ViewUsers> GetViewUsers()
@@ -145,7 +144,7 @@ namespace CvAssignment.Services
             }).ToList();
 
             return View_Users;
-            
+
         }
 
         public PersonalViewModel GetPersonalDetailsView(int User_ID)
@@ -160,22 +159,35 @@ namespace CvAssignment.Services
             p_View.P_Address = p_details.P_Address;
 
             return p_View;
-           
+
         }
 
-        public IEnumerable<SkillsViewModel> GetSkillsView()
+        public IEnumerable<SkillsViewModel> GetSkillsView(int UserID)
         {
             IEnumerable<SkillsViewModel> skills = new List<SkillsViewModel>();
 
+            SkillsViewModel s = new SkillsViewModel();
             List<SkillsModel> skillsList = _logicBL.GetSkillsModels();
-
-            skills = skillsList.Select(x => new SkillsViewModel
-            {
-                SkillsID = x.SkillsID,
-                SkillsName = x.SkillsName
-            });
+ 
+            
+                        skills = skillsList.Select(x => new SkillsViewModel
+                        {
+                            SkillsName = x.SkillsName,
+                           SkillsID = x.SkillsID
+                        });
 
             return skills;
+        }
+        public List<SkillsAcquired> AcquiredSkills(int UserID)
+        {
+            List<string> Acquired = _logicBL.GetAcquiredSkills(UserID);
+            List<SkillsAcquired> skillsAcquire = new List<SkillsAcquired>(); 
+            foreach(var item in Acquired)
+            {
+                skillsAcquire.Add(new SkillsAcquired() { Acquired = item });
+            }
+
+            return skillsAcquire;
         }
 
         public bool EditPersonalViewModel(PersonalViewModel p_model)
@@ -193,16 +205,15 @@ namespace CvAssignment.Services
         }
 
 
-        public bool SaveSkills(List<SkillsViewModel> UserSkills)
+        public bool SaveSkills(List<SkillsViewModel> UserSkills, int UserID)
         {
             List<SkillsModel> Skills = UserSkills.Select(x => new SkillsModel
             {
                 SkillsID = x.SkillsID
+
             }).ToList();
 
-            
-
-            return true;
+            return _logicBL.SaveUserSkills(Skills, UserID);
         }
 
         //public List<EducationModel> GetEducationDetailsList(Guid User_ID)
