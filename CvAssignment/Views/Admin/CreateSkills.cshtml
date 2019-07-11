@@ -7,7 +7,7 @@
 
 <head>
     <script src="~/Scripts/AddNewSkills.js"></script>
-    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <style>
         table {
             border-collapse: collapse;
@@ -24,20 +24,6 @@
 </head>
 
 
-@*@{
-           List<SelectListItem> skillViews = new List<SelectListItem>();
-           foreach (var skills in Model)
-           {
-               skillViews.Add(new SelectListItem()
-               {
-                   Value = skills.SkillsID.ToString(),
-                   Text = skills.SkillsName
-
-               });
-
-           }
-           List<int> skillsID = Model.Select(x => x.SkillsID).ToList();
-    }*@
 
 <h2>CreateSkills</h2>
 <div id="showSkillsAcquired"></div>
@@ -45,19 +31,23 @@
 
 <div id="dropdownRefresh"></div>
 
-@*<div id="skills-main">
-        <div class="skills-container">
-            @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
-            <input type="button" value="Add New Skills" onclick="AddNewSkills()" />
-        </div>
-    </div>*@
-
 
 <div id="CreateNewSkill">
     <label>Create New Skills</label>
     <input id="NewSkillText" type="text" value="" />
+
+    <div>
+        <label>Start Date:</label>
+        <input class="Start" type="date" value="" />
+    </div>
+    <div>
+        <label>End Date:</label>
+        <input class="End" type="date" value="" />
+    </div>
+    <br />
     <input type="submit" value="Save" onclick="SaveNewSkills()" />
 </div>
+<p id="DateError"></p>
 
 
 <script>

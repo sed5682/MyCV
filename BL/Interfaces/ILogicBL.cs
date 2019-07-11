@@ -24,10 +24,12 @@ namespace BL.Interfaces
 
         List<SkillsModel> GetSkillsModels();
 
-        List<string> GetAcquiredSkills(int UserID);
-        bool SaveUserSkills(List<SkillsModel> SkillsToSave, int UserID);
+        List<Person_Skills> GetAcquiredSkills(int UserID);
+        bool SaveUserSkills(Person_Skills SkillsToSave, int UserID);
 
-        bool CreateNewSkill(string SkillName, int UserID);
+        bool CreateNewSkill(string SkillName, string Start, string End, int UserID);
+
+        bool DeleteSkill(string skillName, int User_ID); 
 
         //int GetUserID(UsersModel U_Model);
 

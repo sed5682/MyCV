@@ -91,11 +91,11 @@ namespace BL
             return _homeDAL.GetSkillsList();
         }
 
-        public List<string> GetAcquiredSkills(int UserID)
+        public List<Person_Skills> GetAcquiredSkills(int UserID)
         {
           //  List<SkillsModel> AllSkills = GetSkillsModels();
           // List<Person_Skills> UserSkills = _homeDAL.GetUserSkillsAcquired(UserID);
-            List<string> SkillsAcquiredName = new List<string>();
+            List<Person_Skills> SkillsAcquiredName = new List<Person_Skills>();
 
             foreach(var SkillsID in GetSkillsModels())
             {
@@ -103,7 +103,12 @@ namespace BL
                 {
                     if(SkillsID.SkillsID == UserSkillsID.SkillsID)
                     {
-                        SkillsAcquiredName.Add(SkillsID.SkillsName);
+                        SkillsAcquiredName.Add(new Person_Skills
+                        {
+                            SkillsName = SkillsID.SkillsName,
+                            EffectiveStart = UserSkillsID.EffectiveStart,
+                            EffectiveEnd = UserSkillsID.EffectiveEnd
+                        });
                     }
                 }
             }
@@ -112,22 +117,37 @@ namespace BL
 
         }
 
-        public bool CreateNewSkill(string SkillName, int UserID)
+        public bool CreateNewSkill(string SkillName,string Start,string End, int UserID)
         {
-            return _homeDAL.CreateNewSkills(SkillName, UserID);
-        }
-        public bool SaveUserSkills(List<SkillsModel> SkillsToSave, int UserID)
-        {
-            Person_Skills person = new Person_Skills();
-            foreach(var skillsID in SkillsToSave)
-            {
-                person.Person_ID = UserID;
-                person.SkillsID = skillsID.SkillsID;
-            }
-            
-            
+            int SkillsID = _homeDAL.CreateNewSkills(SkillName, UserID);
 
-            return _homeDAL.SaveUserSkillsDB(person);
+            Person_Skills P_Skills = new Person_Skills()
+            {
+                SkillsID = SkillsID,
+                Person_ID = UserID,
+                EffectiveStart = Convert.ToDateTime(Start),
+                EffectiveEnd = Convert.ToDateTime(End)
+            };
+
+            return _homeDAL.SaveUserSkillsDB(P_Skills);
+        }
+        public bool SaveUserSkills(Person_Skills SkillsToSave, int UserID)
+        {
+           // Person_Skills person = new Person_Skills();
+            //foreach(var skillsID in SkillsToSave)
+            //{
+            //    person.Person_ID = UserID;
+            //    person.SkillsID = skillsID.SkillsID;
+            //    person.EffectiveStart = skillsID.EffectiveStart;
+            //    person.EffectiveEnd = skillsID.EffectiveEnd;
+            //}
+
+            return _homeDAL.SaveUserSkillsDB(SkillsToSave);
+        }
+
+        public bool DeleteSkill(string SkillName, int User_ID)
+        {
+            return _homeDAL.DeletePersonSkills(SkillName, User_ID);
         }
 
 

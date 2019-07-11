@@ -4,16 +4,54 @@
 }
 @model List<CvAssignment.ViewModel.SkillsAcquired>
 
-<table>
-    <tr>
-        <th>Skills Already Acquired</th>
-    </tr>
-    @foreach (var skills in Model.Select(x => x.Acquired))
-    {
-        <tr>
-            <td>
-                @skills
-            </td>
-        </tr>
-    }
-</table>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas: 'header header header';
+
+            background: linear-gradient(to right, rgba(128,128,128,0.2), rgba(128,128,128,0.4) 100%);
+          
+        }
+
+  
+        .header {
+            grid-area: header;
+            font-size: 2.2vh;
+            font-weight: bold;
+            border: 0.1vh solid white;
+            padding: 1vh;
+        }
+
+        .items {
+            text-align: center;
+            font-size: 2vh;
+            border: 0.1vh solid white;
+            padding: 1vh;
+        }
+        .delete-skills{
+            float:right;
+            
+        }
+        .delete-skills:hover{
+            color: black;
+        }        
+    </style>
+</head>
+<div class="main-container">
+    <div class="grid-container">
+        <div class="header">Skills Saved</div>
+        @foreach (var skills in Model)
+        {
+            
+        <div class="items"> <div class="skillname">@skills.Acquired</div> <div class="StartDate">@skills.EffectiveStart </div> <div class="EndDate">@skills.EffectiveEnd</div> <span class="delete-skills"><i class="fa fa-remove" onclick="DeleteSkills('@skills.Acquired')"></i></span></div>
+
+        }
+    </div>
+</div>

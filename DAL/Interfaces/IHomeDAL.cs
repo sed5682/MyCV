@@ -30,6 +30,8 @@ namespace DAL.Interfaces
         bool SaveUserSkillsDB(Person_Skills person);
         List<Person_Skills> GetUserSkillsAcquired(int UserID);
 
-        bool CreateNewSkills(string skillName, int UserID);
+        int CreateNewSkills(string skillName, int UserID);
+
+        bool DeletePersonSkills(string SkillName, int User_ID); 
     }   
 }

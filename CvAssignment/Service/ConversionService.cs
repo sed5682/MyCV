@@ -180,11 +180,11 @@ namespace CvAssignment.Services
         }
         public List<SkillsAcquired> AcquiredSkills(int UserID)
         {
-            List<string> Acquired = _logicBL.GetAcquiredSkills(UserID);
+            List<Person_Skills> Acquired = _logicBL.GetAcquiredSkills(UserID);
             List<SkillsAcquired> skillsAcquire = new List<SkillsAcquired>(); 
             foreach(var item in Acquired)
             {
-                skillsAcquire.Add(new SkillsAcquired() { Acquired = item });
+                skillsAcquire.Add(new SkillsAcquired() { Acquired = item.SkillsName, EffectiveStart = item.EffectiveStart, EffectiveEnd = item.EffectiveEnd });
             }
 
             return skillsAcquire;
@@ -205,15 +205,19 @@ namespace CvAssignment.Services
         }
 
 
-        public bool SaveSkills(List<SkillsViewModel> UserSkills, int UserID)
+        public bool SaveSkills(SkillsViewModel UserSkills, int UserID)
         {
-            List<SkillsModel> Skills = UserSkills.Select(x => new SkillsModel
+            Person_Skills skills = new Person_Skills()
             {
-                SkillsID = x.SkillsID
+                SkillsID = UserSkills.SkillsID,
+                Person_ID = UserID,
+                EffectiveStart = UserSkills.EffectiveStart,
+                EffectiveEnd = UserSkills.EffectiveEnd
+            };
 
-            }).ToList();
+            
 
-            return _logicBL.SaveUserSkills(Skills, UserID);
+            return _logicBL.SaveUserSkills(skills, UserID);
         }
 
         //public List<EducationModel> GetEducationDetailsList(Guid User_ID)

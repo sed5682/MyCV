@@ -11,5 +11,10 @@ namespace DAL.Models
         public int Person_SkillsID { get; set; }
         public int SkillsID { get; set; }
         public int Person_ID { get; set; }
+        public DateTime EffectiveStart { get; set; }
+        public DateTime EffectiveEnd { get; set; }
+
+        public string SkillsName { get; set; }
+
     }
 }

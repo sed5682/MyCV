@@ -86,8 +86,15 @@ namespace CvAssignment.Controllers
         }
 
         [HttpPost]
-        public string SaveSkills(List<SkillsViewModel> SkillsModel)
+        public string SaveSkills(string skillsID,string Start,string End)
         {
+            SkillsViewModel SkillsModel = new SkillsViewModel()
+            {
+                SkillsID = Convert.ToInt32(skillsID),
+                EffectiveStart = Convert.ToDateTime(Start),
+                EffectiveEnd = Convert.ToDateTime(End)
+            };
+
             Session["User_ID"] = "1";
             bool response = _Service.SaveSkills(SkillsModel, Convert.ToInt32(Session["User_ID"]));
             if (response == true)
@@ -147,10 +154,10 @@ namespace CvAssignment.Controllers
         }
 
         [HttpPost]
-        public string CreateNewSkill(string SkillName)
+        public string CreateNewSkill(string SkillName, string Start, string End)
         {
             Session["User_ID"] = "1";
-            bool response = _logicBL.CreateNewSkill(SkillName, Convert.ToInt32(Session["User_ID"]));
+            bool response = _logicBL.CreateNewSkill(SkillName,Start,End, Convert.ToInt32(Session["User_ID"]));
 
             if (response == true)
             {
@@ -158,6 +165,20 @@ namespace CvAssignment.Controllers
             }
             else
                 return "Skills already exist in Dropdown List";
+        }
+
+        [HttpPost]
+        public string DeleteSkill(string SkillsName)
+        {
+            Session["User_ID"] = "1";
+            bool response = _logicBL.DeleteSkill(SkillsName, Convert.ToInt32(Session["User_ID"]));
+
+            if (response == true)
+            {
+                return "Successfully Deleted";
+            }
+            else
+                return "Could not Delete Item";
         }
     }
 }

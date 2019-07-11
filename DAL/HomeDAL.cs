@@ -206,7 +206,7 @@ namespace DAL
             if (dt.Rows.Count == 0)
             {
 
-                string sql = $"INSERT INTO Person_Skills(Person_ID,SkillsID) VALUES({person.Person_ID},{person.SkillsID});";
+                string sql = $"INSERT INTO Person_Skills(Person_ID,SkillsID,EffectiveStart,EffectiveEnd) VALUES({person.Person_ID},{person.SkillsID},'{person.EffectiveStart}','{person.EffectiveEnd}');";
 
                 SqlConnection _connect = CreateSQLConnection();
 
@@ -223,7 +223,7 @@ namespace DAL
 
         public List<Person_Skills> GetUserSkillsAcquired(int UserID)
         {
-            string sql = $"SELECT * FROM Person_SKills WHERE Person_ID = {UserID};; SELECT CAST(scope_identity() AS int)";
+            string sql = $"SELECT * FROM Person_SKills WHERE Person_ID = {UserID};";
             List<Person_Skills> person_Skills = new List<Person_Skills>();
 
             DataTable dt = new DataTable();
@@ -236,15 +236,17 @@ namespace DAL
                     {
                        
                         SkillsID = Convert.ToInt32(dr["SkillsID"]),
-                        Person_ID = Convert.ToInt32(dr["Person_ID"])
-
+                        Person_ID = Convert.ToInt32(dr["Person_ID"]),
+                        EffectiveStart = Convert.ToDateTime(dr["EffectiveStart"].ToString()),
+                        EffectiveEnd = Convert.ToDateTime(dr["EffectiveEnd"].ToString())
+                        
                     });
 
             }
             return person_Skills;
         }
 
-        public bool CreateNewSkills(string skillName, int UserID)
+        public int CreateNewSkills(string skillName, int UserID)
         {
             string sql = $"SELECT SkillsName FROM User_Skills WHERE SkillsName = '{skillName}';";
             DataTable dt = new DataTable();
@@ -258,20 +260,35 @@ namespace DAL
                 _connect.Open();
                 int SkillsID = (int)command.ExecuteScalar();
 
-                string InsertIntoPersonSkills = $"INSERT INTO Person_Skills(Person_ID,SkillsID) VALUES({UserID},{SkillsID});";
-                SqlCommand Insertcommand = new SqlCommand(InsertIntoPersonSkills, _connect);
+                //string InsertIntoPersonSkills = $"INSERT INTO Person_Skills(Person_ID,SkillsID) VALUES({UserID},{SkillsID});";
+                //SqlCommand Insertcommand = new SqlCommand(InsertIntoPersonSkills, _connect);
 
-                Insertcommand.ExecuteNonQuery();
+                //Insertcommand.ExecuteNonQuery();
                 _connect.Close();
 
-                return true;
+                return SkillsID;
 
             }
             else
             {
-                return false;
+                return 0;
             }
         }
+
+        public bool DeletePersonSkills(string SkillName, int User_ID)
+        {
+            string sql = $"Delete p from Person_Skills p Inner join User_Skills u ON u.SkillsID = p.SkillsID Where u.SkillsName = '{SkillName}' AND p.Person_ID = {User_ID};";
+
+            SqlConnection _connect = CreateSQLConnection();
+
+            SqlCommand command = new SqlCommand(sql, _connect);
+            _connect.Open();
+            command.ExecuteNonQuery();
+            _connect.Close();
+
+            return true;
+        }
+
 
 
 

@@ -29,8 +29,19 @@
 
 <div id="skills-main">
     <div class="skills-container">
-        @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
-        <input type="submit" value="Create" class="btn-Create" onclick="SaveSkills()" />
+        <div>
+            <label>Available Skills</label>
+            @Html.DropDownListFor(a => skillsID, skillViews, new { @class = "SkillsID" })
+        </div>
+        <div>
+            <label>Start Date:</label>
+            <input class="EffectiveStart" type="date" value="" />
+        </div>
+        <div>
+            <label>End Date:</label>
+            <input class="EffectiveEnd" type="date" value="" />
+        </div>
+        <input type="submit" value="Add" class="btn-Create" onclick="SaveSkills()" />
         @*<input type="button" value="Add New Skills" onclick="AddNewSkills()" />*@
     </div>
 </div>
